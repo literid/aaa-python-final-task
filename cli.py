@@ -23,7 +23,6 @@ def log(log_message=None, log_time=None) -> callable:
 
             click.echo(log_message if log_message else
                        func.__name__, nl=False)
-            click.echo(' ', nl=False)
             click.echo(log_time if log_time else
                        random.randint(0, 100), nl=False)
             click.echo(' ', nl=False)
@@ -59,9 +58,7 @@ def deliver(pizza: Pizza) -> None:
 @click.group()
 def cli() -> None:
     """
-    Define click group
-
-    :return: None
+    Interface to order pizza
     """
     pass
 
