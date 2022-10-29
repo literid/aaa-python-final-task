@@ -21,9 +21,11 @@ def log(log_message=None, log_time=None) -> callable:
         def wrapper(*args, **kwargs):
             func(*args, **kwargs)
 
-            click.echo(log_message if log_message else func.__name__, nl=False)
+            click.echo(log_message if log_message else
+                       func.__name__, nl=False)
             click.echo(' ', nl=False)
-            click.echo(log_time if log_time else random.randint(0, 100), nl=False)
+            click.echo(log_time if log_time else
+                       random.randint(0, 100), nl=False)
             click.echo(' ', nl=False)
             click.echo('seconds')
 
@@ -76,7 +78,8 @@ def order(pizza_name: str, delivery: bool) -> None:
     :return: None
     """
     pizzas_dict = {
-        'margherita': Margherita(), 'pepperoni': Pepperoni(), 'hawaiian': Hawaiian()
+        'margherita': Margherita(), 'pepperoni': Pepperoni(),
+        'hawaiian': Hawaiian()
     }
 
     if pizza_name not in pizzas_dict:

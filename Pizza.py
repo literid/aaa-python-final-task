@@ -21,7 +21,8 @@ class Pizza(abc.ABC):
         pass
 
     def __repr__(self):
-        return type(self).__name__ + ': ' + ', '.join(ingredient for ingredient in self.dict())
+        return type(self).__name__ + ': ' + ', '.join(
+            ingredient for ingredient in self.dict())
 
 
 class Margherita(Pizza):
