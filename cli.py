@@ -11,8 +11,8 @@ def log(log_message=None, log_time=None) -> callable:
     Parametrized decorator which prints log_message and log_time
     after function execution
 
-    :param log_message: if None prints function name
-    :param log_time: if None print randint from [0,100)
+    :param: log_message: if None prints function name
+    :param: log_time: if None print randint from [0,100)
     :return: decorator object
     """
 
@@ -49,7 +49,7 @@ def deliver(pizza: Pizza) -> None:
     """
     Deliver pizza
 
-    :param pizza: Pizza object
+    :param: pizza: Pizza object
     :return: None
     """
     pass
@@ -69,8 +69,9 @@ def cli() -> None:
 def order(pizza_name: str, delivery: bool) -> None:
     """
     Create pizza and delivery it if delivery flag passed
-    :param pizza_name: string from {'margherita', 'pepperoni', 'hawaiian'}
-    :param delivery: include delivery in order
+
+    :param: pizza_name: string from {'margherita', 'pepperoni', 'hawaiian'}
+    :param: delivery: include delivery in order
 
     :return: None
     """
