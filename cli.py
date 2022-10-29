@@ -3,6 +3,7 @@
 from Pizza import Pizza, Margherita, Pepperoni, Hawaiian
 import click
 import random
+from functools import wraps
 
 
 def log(log_message=None, log_time=None) -> callable:
@@ -16,17 +17,22 @@ def log(log_message=None, log_time=None) -> callable:
     """
 
     def my_decorator(func):
+        @wraps(func)
         def wrapper(*args, **kwargs):
             func(*args, **kwargs)
-            print(log_message if log_message else func.__name__, end=' ')
-            print(log_time if log_time else random.randint(0, 100), 'seconds')
+
+            click.echo(log_message if log_message else func.__name__, nl=False)
+            click.echo(' ', nl=False)
+            click.echo(log_time if log_time else random.randint(0, 100), nl=False)
+            click.echo(' ', nl=False)
+            click.echo('seconds')
 
         return wrapper
 
     return my_decorator
 
 
-@log()
+@log(log_time=10)
 def bake(pizza: Pizza) -> None:
     """
     Bake pizza
@@ -37,7 +43,7 @@ def bake(pizza: Pizza) -> None:
     pass
 
 
-@log('Deliver time -', 50)
+@log(log_time=10)
 def deliver(pizza: Pizza) -> None:
     """
     Deliver pizza
@@ -74,16 +80,16 @@ def order(pizza_name: str, delivery: bool) -> None:
     }
 
     if pizza_name not in pizzas_dict:
-        print('Sorry, only')
-        print(*(pizza for pizza in pizzas_dict.keys()), sep=', ')
-        print('pizza available')
+        click.echo('Sorry, only')
+        click.echo(', '.join(pizzas_dict.keys()))
+        click.echo('pizza available')
         return
 
     pizza = pizzas_dict[pizza_name]
     bake(pizza)
     if delivery:
         deliver(pizza)
-    print('Order is done')
+    click.echo('Order is done')
 
 
 @cli.command()
@@ -94,9 +100,9 @@ def menu() -> None:
     :return: None
     """
     available_pizza = [Margherita(), Pepperoni(), Hawaiian()]
-    print('Available pizzas:')
+    click.echo('Available pizzas:')
     for pizza in available_pizza:
-        print(pizza)
+        click.echo(pizza)
 
 
 if __name__ == '__main__':
