@@ -1,6 +1,6 @@
 """ Cli interface """
 
-from Pizza import Pizza, Margherita, Pepperoni, Hawaiian
+from pizza import Pizza, Margherita, Pepperoni, Hawaiian
 import click
 import random
 from functools import wraps
@@ -20,13 +20,10 @@ def log(log_message=None, log_time=None) -> callable:
         @wraps(func)
         def wrapper(*args, **kwargs):
             func(*args, **kwargs)
-
-            click.echo(log_message if log_message else
-                       func.__name__, nl=False)
-            click.echo(log_time if log_time else
-                       random.randint(0, 100), nl=False)
-            click.echo(' ', nl=False)
-            click.echo('seconds')
+            log_message_ = log_message if log_message else func.__name__
+            log_time_ = log_time if log_time else random.randint(0, 100)
+            echo_message = f'{log_message_} {log_time_} seconds'
+            click.echo(echo_message)
 
         return wrapper
 
